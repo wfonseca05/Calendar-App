@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar } from '../ui/Navbar';
 import {Calendar , momentLocalizer  } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/es'
 import { messages } from '../../helpers/calendar-messages-espannol';
 import { CalendarEvent } from './CalendarEvent';
+import { CalendarModal } from './CalendarModal';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -26,6 +27,8 @@ const events = [{
 
 export const CalendarScreen = () => {
 
+    const [lastView, setLastView] = useState( localStorage.getItem('lastView' ) || 'month' )
+
     const onDoubleClick = (e) => {
         console.log(e)
     }
@@ -33,6 +36,13 @@ export const CalendarScreen = () => {
     const onSelectEvent = (e) => {
         console.log(e)
     }
+
+    const onViewChange = (e) => {
+        setLastView( e );
+        localStorage.setItem('lastView' , e)
+    }
+
+
 
     const eventsStyleGetter = ( event, start, end , isSelected ) => { 
         const style = {
@@ -60,10 +70,14 @@ export const CalendarScreen = () => {
               eventPropGetter = {eventsStyleGetter}
               onDoubleClickEvent={onDoubleClick}
               onSelectEvent={onSelectEvent}
+              onView= {onViewChange}
+              view= {lastView}
               components= {{
                   event: CalendarEvent
               }}
             />
+
+            <CalendarModal />
         </div>
     )
 }
