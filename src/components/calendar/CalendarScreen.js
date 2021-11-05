@@ -42,6 +42,8 @@ export const CalendarScreen = () => {
         localStorage.setItem('lastView' , e)
     }
 
+    
+
 
 
     const eventsStyleGetter = ( event, start, end , isSelected ) => { 
