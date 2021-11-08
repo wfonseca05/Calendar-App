@@ -52,11 +52,19 @@ export const CalendarModal = () => {
 
   const handleStartDateChange = ( e ) => {
     setDateStart( e );
+    setFormValues({
+      ...formValues,
+      start: e
+    })
 
   }
 
   const handleEndDateChange = ( e ) => {
     setDateEnd( e );
+    setFormValues({
+      ...formValues,
+      end: e
+    })
 
   }
 
@@ -97,7 +105,7 @@ export const CalendarModal = () => {
           <DateTimePicker
             onChange={ handleEndDateChange}
             value={dateEnd}
-            minDate={dateStart}
+            minDate={ dateStart }
             className="form-control"
             format="y-MM-dd h:mm:ss a"
             amPmAriaLabel="Select AM/PM"
